@@ -1,0 +1,25 @@
+name: Public Contribution Repo Updates Notify Private Custom Repo
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # - name: Checkout destination repository
+      # uses: actions/checkout@v4
+      # with:
+      # Generate a Personal Access Token in private fork with repo/workflow scopes
+      # Add to contribution fork Secrets as PRIVATE_REPO_PAT
+      # Use the PAT to allow pushing changes
+      # token: ${{ secrets.PRIVATE_REPO_PAT }}
+
+      - name: Sync public repo to private branch
+        uses: repo-sync/github-sync@v2
+        with:
+          source_repo: "esimplicity-copilot/datahub"
+          source_branch: "master"
+          destination_branch: "master"
+          github_token: ${{ secrets.PRIVATE_REPO_PAT }}
