@@ -45,6 +45,7 @@ const colors = {
     },
 
     // by default, our primary pallette is the same as our violet pallette
+    // update default primary colors here for full customization
     primary: {
         0: '#F1F3FD',
         100: '#CAC3F1',
