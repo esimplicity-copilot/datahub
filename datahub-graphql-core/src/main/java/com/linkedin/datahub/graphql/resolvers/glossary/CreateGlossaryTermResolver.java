@@ -40,6 +40,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.text.StringEscapeUtils;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -115,8 +116,9 @@ public class CreateGlossaryTermResolver implements DataFetcher<CompletableFuture
     final GlossaryTermInfo result = new GlossaryTermInfo();
     result.setName(input.getName());
     result.setTermSource("INTERNAL");
-    final String description = input.getDescription() != null ? input.getDescription() : "";
-    result.setDefinition(description);
+    String raw = input.getDescription() != null ? input.getDescription() : "";
+    String escapedDescription = StringEscapeUtils.escapeHtml4(raw);
+    result.setDefinition(escapedDescription);
     if (input.getParentNode() != null) {
       try {
         final GlossaryNodeUrn parentNode = GlossaryNodeUrn.createFromString(input.getParentNode());
